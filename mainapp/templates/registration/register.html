@@ -1,0 +1,19 @@
+<h2>Register</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h1 class="mt-2">PiDust Platform</h1>
+            <hr class="mt-0 mb-4">
+
+            {% load crispy_forms_tags %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Register</button>
+            </form>
+            <a href="{% url 'login' %}">Already a member? Log In!</a>
+        </div>
+    </div>
+</div>
