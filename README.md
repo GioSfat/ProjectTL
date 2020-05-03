@@ -12,5 +12,7 @@
 Παρακάτω μπορείτε να βρείτε links με κάποια screenshot από οθόνες,που έχουμε υλοποιήσει μέχρι στιγμής. 
 
 *[Login](https://prnt.sc/sa7n0u)
+
 *[Register](https://prnt.sc/sa7n7c)
-*[Map Page: Οθόνη που ο χρήστης θα κάνει search by radius](https://prnt.sc/sa7o4q)
+
+*[Map Page](https://prnt.sc/sa7o4q): Οθόνη που ο χρήστης θα κάνει search by radius
