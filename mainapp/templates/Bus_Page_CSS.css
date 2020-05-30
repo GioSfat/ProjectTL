@@ -1,0 +1,28 @@
+
+
+
+.background .btn1{
+    border: 2px solid #2C8085;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    width: 150px;
+    top: 20px;
+    right: 10px;
+    font-size: 20px;
+    text-align: -moz-center;
+}
+.background .btn2{
+    border: 2px solid #2C8085;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    width: 150px ;
+    top: 20px;
+    right: 200px;
+    font-size: 20px;
+    text-align: -moz-center;
+}
+
+
+
