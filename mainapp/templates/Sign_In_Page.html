@@ -15,6 +15,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <style>
+            .button3 {
+            border: 2px solid #2C8085;
+            background-color: DodgerBlue;
+            position: absolute;
+            color: white;
+            margin: 110px;
+            center: 50px;
+            width: 150px;
+            height: 30px;
+            text-align: center;
+            text-align: -moz-center;
+            }
+
+            .button4 {
+            border: 2px solid #2C8085;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            position: absolute;
+            right: 100px;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            text-align: -moz-center;
+            }
+    </style>
 
 </head>
 <body>
@@ -33,6 +59,8 @@
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <div class="container">
+    <br>
+    <br>
     <div class="row">
     <form class="form-inline" action="/action_page.php">
         <div class="col-sm-4">
@@ -40,32 +68,43 @@
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
         </div>
+            <br>
+            <br>
         <div class="form-group">
-            <label for="firstname">Firstname</label>
-            <input type="text" class="form-control" id="firstname" placeholder="Enter Firstname" name="firstname">
+            <label for="name">Firstname</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter Firstname" name="name">
         </div>
+            <br>
+            <br>
         <div class="form-group">
-            <label for="lastname">Lastname</label>
-            <input type="text" class="form-control" id="lastname" placeholder="Enter Lastname" name="lastname">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" placeholder="Enter Surname" name="surname">
         </div>
         </div>
     </form>
+        <br>
+        <br>
     <form class="form-inline" action="/action_page.php">
         <div class="col-sm-4">
         <div class="form-group">
            <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password">
         </div>
+            <br>
+            <br>
         <div class="form-group">
            <label for="email">E-mail</label>
             <input type="email" class="form-control" id="email" placeholder="Enter E-mail" name="email">
         </div>
+            <br>
+            <br>
         <div class="form-group">
-           <label for="phone-number">Phone Number</label>
-            <input type="tel" class="form-control" id="phone-number" placeholder="Enter Phone Number" name="phone-number"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}">
+           <label for="phoneNumber">Phone Number</label>
+            <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}">
         </div>
         </div>
     </form>
+    <form action="/action_page.php">
     <div class="dropdown">
         <div class="row">
         <div class="form-group">
@@ -90,6 +129,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Day</button>
                 <ul class="dropdown-menu">
 
+
                 </ul>
 
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Year</button>
@@ -100,7 +140,20 @@
         </div>
         </div>
     </div>
+    </form>
 </div>
+<br>
+<br>
+<br>
+<br>
+    <div class="row">
+        <label>Choice User:</label>
+        <button type="button" class="btn btn-primary">Customer</button>
+        <button type="button" class="btn btn-primary">Owner</button>
+        <button type="button" class="button3" onclick="document.location = ''" >Upload Image...</button>
+        <button type="button" class="button4">Sign In</button>
+    </div>
+
 </div>
 </body>
 </html>
