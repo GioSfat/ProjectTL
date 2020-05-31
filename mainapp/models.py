@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from enum import Enum
+from polymorphic.models import PolymorphicModel
 
 
 class UserManager(BaseUserManager):
@@ -74,8 +75,8 @@ class User(AbstractBaseUser):
 
 class Coordinates(models.Model):
     long = models.FloatField(blank=False)
-    lat = models.BigIntegerField(blank=False)
-    add = models.CharField(max_length=70, null=True)
+    lat = models.FloatField(blank=False)
+    address = models.CharField(max_length=70, null=True)
     city = models.CharField(max_length=70, null=True)
     coord_id = models.AutoField(primary_key=True, editable=False)  # na koitaksoyme an kanei swsto crossing
 
@@ -95,7 +96,7 @@ class Schedule(Enum):
 class Business(models.Model):
     busName = models.CharField(max_length=100)
     busID = models.AutoField(primary_key=True, editable=False)
-    phoneNum = models.IntegerField(max_length=10, null=True, blank=True)
+    phoneNum = models.IntegerField(null=True, blank=True)
     busEmail = models.EmailField(max_length=150)
     busSite = models.CharField(max_length=100)
     bsuSchedule = models.CharField(max_length=10,
@@ -119,10 +120,20 @@ class Business(models.Model):
 #         pass
 #
 
-class Reviews(models.Model):
-    comments = models.TextField()
-    ratings = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(100)])
+class Reviews(PolymorphicModel):
+    review_id = models.AutoField(primary_key=True, editable=False)
+    #cus_id=models.ForeignKey(Customer, null=False, blank=False, editable=False, on_delete=models.CASCADE)
     busID = models.ForeignKey(Business, null=False, blank=False, editable=False, on_delete=models.CASCADE)
+
+class Comments(Reviews):
+       comment=models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
+                                validators=[MinValueValidator(1), MaxValueValidator(300)])
+
+class Rating(Reviews):
+       rate=models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars',validators=[MinValueValidator(1),
+                                                                                              MaxValueValidator(5)])
+
+
 
 #
 # class Reservations(models.Model):
@@ -135,3 +146,19 @@ class Reviews(models.Model):
 #     @classmethod
 #     def book_res(cls, day):
 #         pass
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+
