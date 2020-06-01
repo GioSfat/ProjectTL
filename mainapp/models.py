@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from enum import Enum
+
+from django.db.models import AutoField
 from polymorphic.models import PolymorphicModel
 
 
@@ -23,7 +25,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, first_name, last_name, password):
+    def create_superuser(self, email, username, first_name, last_name, password):  # einai o Reviewer?
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
@@ -93,55 +95,84 @@ class Schedule(Enum):
     night = "19:00 - 24:00"
 
 
-class Business(models.Model):
-    busName = models.CharField(max_length=100)
+class Business(PolymorphicModel):
     busID = models.AutoField(primary_key=True, editable=False)
     phoneNum = models.IntegerField(null=True, blank=True)
-    busEmail = models.EmailField(max_length=150)
+    busEmail = User.email
     busSite = models.CharField(max_length=100)
-    bsuSchedule = models.CharField(max_length=10,
+    busSchedule = models.CharField(max_length=10,
                                    choices=[(tag, tag.value) for tag in Schedule])
     multimedia = models.FileField(editable=True)  # stin parenthesi tha valoume (upload_to="fakelos gia photos")
     coordID = models.ForeignKey(Coordinates,
                                 on_delete=models.CASCADE)  # na koitaksoyme an kanei swsto crossing
-    # resID = models.ForeignKey()
     ownerID = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.CharField(max_length=10,
                             choices=[(tag, tag.value) for tag in Preferences])
 
 
-#     class Restaurant:
-#         pass
-#
-#     class CoffeeShop:
-#         pass
-#
-#     class Bar:
-#         pass
-#
+class Owner(models.Model):
+    bus_Name = models.CharField(max_length=100)
+    owner_id = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    bus_id = models.ForeignKey(Business, on_delete=models.CASCADE)
+
+
+class Customer(models.Model):
+    cusID = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    phoneNumber = models.PositiveIntegerField(null=True, blank=True, help_text='Write Your Phone Number',
+                                              validators=[MaxValueValidator(10)])
+
+
+class Reviewer(models.Model):
+    revID = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+
+
+class Restaurant(Business):
+    dayDishes = models.CharField(max_length=100, null=True, blank=False)
+
+
+class CoffeeShop(Business):
+    pass
+
+
+class Bar(Business):
+    pass
+
 
 class Reviews(PolymorphicModel):
     review_id = models.AutoField(primary_key=True, editable=False)
-    #cus_id=models.ForeignKey(Customer, null=False, blank=False, editable=False, on_delete=models.CASCADE)
+    cus_id = models.ForeignKey(Customer, null=False, blank=False, editable=False, on_delete=models.CASCADE)
     busID = models.ForeignKey(Business, null=False, blank=False, editable=False, on_delete=models.CASCADE)
 
+    def get_review_id(self):
+         return self.review_id
+
+
+
+
 class Comments(Reviews):
-       comment=models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
-                                validators=[MinValueValidator(1), MaxValueValidator(300)])
+    comment = models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
+                               validators=[MinValueValidator(1), MaxValueValidator(300)])
+
+    def set_commment(self,com):
+        pass
+
+    def get_Com(self):
+        return self.comment
+
 
 class Rating(Reviews):
-       rate=models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars',validators=[MinValueValidator(1),
+    rate = models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars', validators=[MinValueValidator(1),
                                                                                               MaxValueValidator(5)])
+    # def setRate(value:String):
+    # def getRate():
 
 
+class Reservations(models.Model):
+    day = models.DateTimeField()
+    resID = models.AutoField(primary_key=True, editable=False)
+    busID = models.ForeignKey(Business, on_delete=models.CASCADE)
+    customerID = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#
-# class Reservations(models.Model):
-#     day = models.DateTimeField()
-#     resID = models.AutoField(primary_key=True, editable=False)
-#     busID = models.ForeignKey(Business.busID, on_delete=models.CASCADE)
-#     customerID = models.ForeignKey(User.Customer, on_delete=models.CASCADE)
-#     rating = models.PositiveIntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
 #
 #     @classmethod
 #     def book_res(cls, day):
@@ -160,5 +191,3 @@ class Rating(Reviews):
 #
 #
 #
-
-
