@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from enum import Enum
-
-from django.db.models import AutoField
 from polymorphic.models import PolymorphicModel
 
 
@@ -82,6 +80,42 @@ class Coordinates(models.Model):
     city = models.CharField(max_length=70, null=True)
     coord_id = models.AutoField(primary_key=True, editable=False)  # na koitaksoyme an kanei swsto crossing
 
+    def set_lat(self, new_lat):
+        print('Write your new latitude')
+        new_lat = models.FloatField(blank=False)
+        return new_lat
+        # mporei na xreiastei na valoyme
+
+    def set_long(self, new_long):
+        print('Write your new longitude')
+        new_long = models.FloatField()
+        return new_long
+
+    def set_address(self, new_address):
+        print('Write your new address')
+        new_address = models.CharField(max_length=70, null=True)
+        return new_address
+
+    def set_city(self, new_city):
+        print('Write your new city')
+        new_city = models.CharField(max_length=70, null=True)
+        return new_city
+
+    def get_coord_id(self):
+        return self.coord_id
+
+    def get_lat(self):
+        return self.lat
+
+    def get_long(self):
+        return self.long
+
+    def get_address(self):
+        return self.address
+
+    def get_city(self):
+        return self.city
+
 
 class Preferences(Enum):
     bar = "Bar"
@@ -144,31 +178,40 @@ class Reviews(PolymorphicModel):
     busID = models.ForeignKey(Business, null=False, blank=False, editable=False, on_delete=models.CASCADE)
 
     def get_review_id(self):
-         return self.review_id
-
-
+        return f'The Review Id is {self.review_id}'
 
 
 class Comments(Reviews):
-    comment = models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
-                               validators=[MinValueValidator(1), MaxValueValidator(300)])
+    com = models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
+                           validators=[MinValueValidator(1), MaxValueValidator(300)])
 
-    def set_commment(self,com):
-        pass
+    def set_edit_com(self, new_com):
+        print('You can edit your comment')
+        new_com = self.com
+        return new_com
 
-    def get_Com(self):
-        return self.comment
+    def get_com(self):
+        return f'The comment for the Business is {self.com}'
+
+    def snippet(self):  # an einai megalo to comment tha deixnei mono ta 20 prwta grammata
+        return self.com[:20]
 
 
 class Rating(Reviews):
     rate = models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars', validators=[MinValueValidator(1),
                                                                                               MaxValueValidator(5)])
-    # def setRate(value:String):
-    # def getRate():
+
+    def setRate(self, new_rate):
+        print('You can adjust your star-rating')
+        new_rate = self.rate
+        return new_rate
+
+    def getRate(self):
+        return self.rate
 
 
 class Reservations(models.Model):
-    day = models.DateTimeField()
+    day = models.DateTimeField(auto_now=False, auto_now_add=False)
     resID = models.AutoField(primary_key=True, editable=False)
     busID = models.ForeignKey(Business, on_delete=models.CASCADE)
     customerID = models.ForeignKey(User, on_delete=models.CASCADE)
