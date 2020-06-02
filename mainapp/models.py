@@ -81,26 +81,16 @@ class Coordinates(models.Model):
     coord_id = models.AutoField(primary_key=True, editable=False)  # na koitaksoyme an kanei swsto crossing
 
     def set_lat(self, new_lat):
-        print('Write your new latitude')
-        new_lat = models.FloatField(blank=False)
-        self.lat=new_lat
-        return self.lat
-        # mporei na xreiastei na valoyme
+        self.lat = new_lat
 
     def set_long(self, new_long):
-        print('Write your new longitude')
-        new_long = models.FloatField()
-        return new_long
+        self.long = new_long
 
     def set_address(self, new_address):
-        print('Write your new address')
-        new_address = models.CharField(max_length=70, null=True)
-        return new_address
+        self.address = new_address
 
     def set_city(self, new_city):
-        print('Write your new city')
-        new_city = models.CharField(max_length=70, null=True)
-        return new_city
+        self.city = new_city
 
     def get_coord_id(self):
         return self.coord_id
@@ -131,6 +121,7 @@ class Schedule(Enum):
 
 
 class Business(PolymorphicModel):
+    bus_Name = models.CharField(max_length=100)
     busID = models.AutoField(primary_key=True, editable=False)
     phoneNum = models.IntegerField(null=True, blank=True)
     busEmail = User.email
@@ -144,9 +135,48 @@ class Business(PolymorphicModel):
     tags = models.CharField(max_length=10,
                             choices=[(tag, tag.value) for tag in Preferences])
 
+    def set_business_name(self, new_bus_name):
+        self.bus_Name = new_bus_name
+
+    def set_phone(self, new_phone):
+        self.phoneNum = new_phone
+
+    def set_bus_email(self, new_email):
+        self.busEmail = new_email
+
+    def set_bus_site(self, new_site):
+        self.busSite = new_site
+
+    def set_bus_schedule(self, new_schedule):
+        self.busSchedule = new_schedule
+
+    def set_multimedia(self, new_multimedia):
+        self.multimedia = new_multimedia
+
+    def get_bus_id(self):
+        return self.busID
+
+    def get_bus_name(self):
+        return self.bus_Name
+
+    def get_phone(self):
+        return self.phoneNum
+
+    def get_bus_email(self):
+        return self.busEmail
+
+    def get_bus_site(self):
+        return self.busSite
+
+    def get_bus_schedule(self):
+        return self.busSchedule
+
+    def get_multimedia(self):
+        return self.multimedia
+
 
 class Owner(models.Model):
-    bus_Name = models.CharField(max_length=100)
+
     owner_id = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     bus_id = models.ForeignKey(Business, on_delete=models.CASCADE)
 
@@ -179,7 +209,7 @@ class Reviews(PolymorphicModel):
     busID = models.ForeignKey(Business, null=False, blank=False, editable=False, on_delete=models.CASCADE)
 
     def get_review_id(self):
-        return f'The Review Id is {self.review_id}'
+        return self.review_id
 
 
 class Comments(Reviews):
@@ -187,12 +217,10 @@ class Comments(Reviews):
                            validators=[MinValueValidator(1), MaxValueValidator(300)])
 
     def set_edit_com(self, new_com):
-        print('You can edit your comment')
-        new_com = self.com
-        return new_com
+        self.com = new_com
 
     def get_com(self):
-        return f'The comment for the Business is {self.com}'
+        return self.com
 
     def snippet(self):  # an einai megalo to comment tha deixnei mono ta 20 prwta grammata
         return self.com[:20]
@@ -202,12 +230,10 @@ class Rating(Reviews):
     rate = models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars', validators=[MinValueValidator(1),
                                                                                               MaxValueValidator(5)])
 
-    def setRate(self, new_rate):
-        print('You can adjust your star-rating')
-        new_rate = self.rate
-        return new_rate
+    def set_rate(self, new_rate):
+        self.rate = new_rate
 
-    def getRate(self):
+    def get_rate(self):
         return self.rate
 
 
@@ -216,6 +242,18 @@ class Reservations(models.Model):
     resID = models.AutoField(primary_key=True, editable=False)
     busID = models.ForeignKey(Business, on_delete=models.CASCADE)
     customerID = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def set_day(self, day_time):
+        self.day = day_time
+
+    def get_res(self):
+        return self.resID
+
+    def get_bus(self):
+        return self.busID
+
+    def get_customer(self):
+        return self.customerID
 
 #
 #     @classmethod
