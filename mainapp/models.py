@@ -83,7 +83,8 @@ class Coordinates(models.Model):
     def set_lat(self, new_lat):
         print('Write your new latitude')
         new_lat = models.FloatField(blank=False)
-        return new_lat
+        self.lat=new_lat
+        return self.lat
         # mporei na xreiastei na valoyme
 
     def set_long(self, new_long):
