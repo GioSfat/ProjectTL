@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BestNearMe</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="shortcut icon" href="Logos/BNM.ico"/>
+    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <style>
+        #mapid {
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            height: 600px;
+            width: 1000px;
+        }
+    </style>
+</head>
+<body>
+<div class="background">
+    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+
+    <button class="btn1">Sign Out</button>
+</div>
+<br>
+<div class="row" style="margin-left: 30px">
+    <div class="col-7">
+        <div id="mapid" style="box-shadow: 10px 10px #00000050"></div>
+        <!-- <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
+        <script>
+            const mymap = L.map('mapid').setView([38.2282, 21.7720], 13);
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+            const marker = L.marker([38.250, 21.740]).addTo(mymap);
+            //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+        </script>
+    </div>
+    <div class="col-4" style="background: #224666; border-radius: 4px; box-shadow: 10px 10px #00000050 ;">
+        <h2 style="color: #E2E8E3"><u >Close Businesses</u></h2>
+        <br>
+        <div class="businessBox">
+            <u>Business Name</u>
+            <br>
+            <button class="businessButton" style="">Click Me</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
