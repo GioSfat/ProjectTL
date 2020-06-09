@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BestNearMe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="shortcut icon" href="Logos/BNM.ico"/>
+    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+</head>
+<body>
+<div class="background">
+    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+    <a href="registration/login.html"><button class="btn2">Log In</button></a>
+    <a href="registration/register.html"><button class="btn1">Sign In</button></a>
+</div>
+<p></p>
+<div class="row" style="margin-left: 100px">
+
+    <div class="col-7 col-lg-8 col-sm-9" style="min-height: 100%;border: solid black 2px;background: #224666;">
+
+        <h1 style="text-align: center;color: #E2E8E3;">Hello World</h1>
+        <div class="row" style="position: center;">
+            <div class="row" style="margin: 0 auto;">
+                <div class="col-4 col-md-4 col-lg-4 col-sm-4">
+                    <img src="Logos/img1.png" style="width: 100%;height: 100%" alt="img1">
+                </div>
+                <div class="col-4 col-md-4 col-lg-4 col-sm-4">
+                    <img src="Logos/img2.png" style="width: 100%;height: 100%" alt="img1">
+                </div>
+                <div class="col-4 col-md-4 col-lg-4 col-sm-4">
+                    <img src="Logos/img3.png" style="width: 100%;height: 100%" alt="img1">
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+
+            <div class="col-6 col-sm-6 col-lg-6 col-md-6">
+                <h2 style="color: #E2E8E3; text-align: center; ">Information</h2>
+                <div style="color: #E2E8E3; border: 2px solid #00000090;">
+                    <ul style="font-size: 25px">
+                        <li>Name</li>
+                        <li>City:</li>
+                        <li>Address:</li>
+                        <li>Phone Number: </li>
+                        <li>Business E-mail: </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-lg-6 col-md-6">
+                <h2 style="color: #E2E8E3; text-align: center; ">Tags</h2>
+                <div style="color: #E2E8E3; border: 2px solid #00000090;">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                    essentially unchanged.
+                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem
+                    Ipsum.
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="separator" style=" border-left: 30px solid white;">
+
+    </div>
+    <div class="col-4 col-lg-3 col-sm-2" style="min-height: 100%;border:solid black 2px;background: #224666">
+        <h2 style="text-align: center; color: #E2E8E3;">Reviews & Ratings</h2>
+        <div id="mapid"></div>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

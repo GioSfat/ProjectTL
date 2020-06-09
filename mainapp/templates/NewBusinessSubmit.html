@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BestNearMe</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="shortcut icon" href="Logos/BNM.ico"/>
+    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <style>
+        #mapid {
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            height: 300px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+<div class="background">
+    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+
+    <button class="btn1">Sign Out</button>
+</div>
+<br>
+<div class="row">
+    <div class="col-2" style="margin-left: 20px">
+        <div class="test">
+            <img src="Logos/Avatar.jpg" alt="defautlAvatar" style="margin-left: 50px">
+        </div>
+        <br>
+        <form>
+            <label for="username" class="InfoBoxes">Username</label><br>
+            <label for="name" class="InfoBoxes">First Name</label><br>
+            <label for="surname" class="InfoBoxes">Last Name</label><br>
+            <label for="PhoneNumber" class="InfoBoxes">Phone Number</label><br>
+            <label for="E-mail" class="InfoBoxes">E-mail</label><br>
+            <a href="Change_Info_Cus.html">
+                <button class="changeInfo">Change Info</button>
+            </a>
+        </form>
+
+    </div>
+    <div class="col-1"></div>
+    <div class="col-8" style="background: #224666">
+        <br>
+        <form action="/action_page.php" method="get" >
+            <div class="row" style="margin-left: 30px;">
+                <div class="col-sm-4 col-4 col-lg-4 col-md-4">
+
+                    <label for="" style="font-size: 1.5em; color: #E2E8E3">Business Name:</label><br>
+                    <input type="text" id="busName" name="Business Name" value=""
+                           style="font-size:1.5em;height: 1.9em; width: 9.5em"><br>
+
+                    <label for="" style="font-size: 1.5em;color: #E2E8E3">Business E-mail:</label><br>
+                    <input type="email" id="busEmail" name="E-mail" value=""
+                           style="font-size: 1.5em;height: 1.9em; width: 12em"><br>
+
+                </div>
+
+                <div class="col-sm-4 col-4 col-lg-4 col-md-4">
+
+                    <label for="" style="font-size: 1.5em;color: #E2E8E3">Address:</label><br>
+                    <input type="text" id="busAddress" name="Address" value=""
+                           style="font-size: 1.5em;height: 1.9em; width: 9.5em"><br>
+
+                    <label for="" style="font-size: 1.5em;color: #E2E8E3">Phone Number:</label><br>
+                    <input type="text" id="phoneNum" name="phoneNumber" value=""
+                           style="font-size: 1.5em;height: 1.9em; width: 9.5em;"><br><br>
+
+                </div>
+
+                <div class="col-sm-4 col-4 col-lg-4 col-md-4">
+                    <label for="" style="font-size:1.5em;color: #E2E8E3">City:</label><br>
+                    <input type="text" id="busCity" name="City" value=""
+                           style="font-size: 1.5em;height: 1.9em; width: 9.5em;"><br>
+
+                    <label for="appt" style="font-size:1.5em;color: #E2E8E3">Working Time</label><br>
+                    <div class="row">
+                        <div class="col-4">
+                            <select name="time" id="time"
+                                    style="text-align:center;font-size: 1.5em;height: 1.5em; width: 5em;">
+                                <option value="8am">08:00</option>
+                                <option value="9am">09:00</option>
+                                <option value="10am">10:00</option>
+                                <option value="11am">11:00</option>
+                                <option value="12pm">12:00</option>
+                                <option value="1pm">13:00</option>
+                                <option value="2pm">14:00</option>
+                                <option value="3pm">15:00</option>
+                                <option value="4pm">16:00</option>
+                                <option value="5pm">17:00</option>
+                                <option value="6pm">18:00</option>
+                                <option value="7pm">19:00</option>
+                                <option value="8pm">20:00</option>
+                                <option value="9pm">21:00</option>
+                                <option value="10pm">22:00</option>
+                                <option value="11pm">23:00</option>
+                                <option value="12am">00:00</option>
+                            </select>
+                        </div>
+                        <div class="col-1" style="margin-top:0;text-align:center;font-size: 1.5em;color: #E2E8E3">-
+                        </div>
+                        <div class="col-4">
+                            <select name="time" id="time"
+                                    style="text-align:center;font-size: 1.5em;height: 1.5em; width: 5em;">
+                                <option value="8am">08:00</option>
+                                <option value="9am">09:00</option>
+                                <option value="10am">10:00</option>
+                                <option value="11am">11:00</option>
+                                <option value="12pm">12:00</option>
+                                <option value="1pm">13:00</option>
+                                <option value="2pm">14:00</option>
+                                <option value="3pm">15:00</option>
+                                <option value="4pm">16:00</option>
+                                <option value="5pm">17:00</option>
+                                <option value="6pm">18:00</option>
+                                <option value="7pm">19:00</option>
+                                <option value="8pm">20:00</option>
+                                <option value="9pm">21:00</option>
+                                <option value="10pm">22:00</option>
+                                <option value="11pm">23:00</option>
+                                <option value="12am">00:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7" style="margin-left: 30px">
+                    <div id="mapid"></div>
+                    <!-- <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script> -->
+                    <script>
+                        const mymap = L.map('mapid').setView([38.2282,21.7720], 13);
+
+                        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(mymap);
+                        const marker = L.marker([38.250, 21.740]).addTo(mymap);
+                        //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+                    </script>
+                    <br>
+                    <input type="submit" value="Submit" class="submitBtn" style="margin-bottom: 10px">
+                </div>
+                <div class="col-4"  >
+                    <div style="padding-left: 20px;margin:0 auto;font-size: 1.5em;color: #E2E8E3; border: 2px solid black;height: auto">
+                        <h1 style="text-align: center; color: #E2E8E3"><u>Tags</u></h1>
+
+                        <input type="checkbox" name="Business1" value="Coffee Shop">
+                        <label for=""> Coffee Shop</label><br>
+                        <input type="checkbox" name="Business2" value="Restaurant">
+                        <label for=""> Restaurant</label><br>
+                        <input type="checkbox" name="Business3" value="Bar" >
+                        <label for="facilities"> Bar</label><br>
+                        <input type="checkbox" name="Music" value="Music" >
+                        <label for="facilities"> Music</label><br>
+                        <input type="checkbox" name="Alcohol" value="Alcohol" >
+                        <label for="facilities"> Alcohol</label><br>
+                        <input type="checkbox" name="Food" value="Greek Cuisine" >
+                        <label for="facilities"> Greek Cuisine</label><br>
+                        <input type="checkbox" name="Food" value="Vegetarian" >
+                        <label for="facilities"> Vegetarian Cuisine</label><br>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
