@@ -1,0 +1,30 @@
+h1 { margin-top: 0; }
+
+.background .button1{
+    border: 2px solid #2C8085;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    width: 150px;
+    top: 30px;
+    right: 5px;
+    font-size: 20px;
+    text-align: -moz-center;
+
+}
+.background .button2{
+    border: 2px solid #2C8085;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    width: 150px;
+    top: 30px;
+    right: 180px;
+    font-size: 20px;
+    text-align: center;
+    text-align: -moz-center;
+}
+.imgTop{
+    top: 10px;
+    left: 0;
+}

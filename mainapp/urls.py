@@ -12,5 +12,7 @@ urlpatterns = [
     path('change_info_bus/', views.change_info_bus, name='change_info_bus'),
     path('customer/', views.customer, name='customer'),
     path('bus_sbm/', views.business_submit, name='business_submit'),
+    path('search_by_rad/', views.search_by_radius, name='search_by_radius'),
+
 
 ]

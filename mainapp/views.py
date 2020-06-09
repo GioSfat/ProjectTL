@@ -8,7 +8,7 @@ from mainapp.forms import RegisterForm
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, 'SearchByDistance.html')
+    return render(request, 'Home_Page.html')
 
 
 def register(request):
@@ -47,3 +47,7 @@ def customer(request):
 @login_required
 def business_submit(request):
     return render(request, 'NewBusinessSubmit.html')
+
+@login_required
+def search_by_radius(request):
+    return render(request, 'SearchByRadius.html')
