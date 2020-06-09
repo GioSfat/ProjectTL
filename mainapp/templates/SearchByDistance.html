@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +13,8 @@
             crossorigin=""></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="shortcut icon" href="Logos/BNM.ico"/>
-    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <link rel="shortcut icon" href="{% static "images/BNM.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "styleCss.css" %}">
     <style>
         #mapid {
             left: 0;
@@ -26,7 +28,7 @@
 </head>
 <body>
 <div class="background">
-    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+    <img src="{% static "images/Background.jpg" %}" alt="background" style="width: 100%; position: relative;">
 
     <button class="btn1">Sign Out</button>
 </div>

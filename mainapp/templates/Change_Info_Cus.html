@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +7,12 @@
     <title>BestNearMe</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="shortcut icon" href="Logos/BNM.ico"/>
-    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <link rel="shortcut icon" href="{% static "images/BNM.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "styleCss.css" %}">
 </head>
 <body>
 <div class="background">
-    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+    <img src="{% static "images/Background.jpg" %}" alt="background" style="width: 100%; position: relative;">
 
     <button class="btn1">Sign Out</button>
 </div>
@@ -20,7 +22,7 @@
     <div class="row">
         <div class="col-2 col-sm-2 col-lg-2 col-md-2" style="margin-left: 10px ">
 
-                <img class="avatar" src="Logos/Avatar.jpg" alt="defaultAvatar">
+                <img class="avatar" src="{% static "images/Avatar.jpg" %}" alt="defaultAvatar">
 
             <form action="">
                 <input style="border: 2px solid #E2E8E3; background: #224666; height:auto;width:400px;font-size: 25px;color: #E2E8E3 "

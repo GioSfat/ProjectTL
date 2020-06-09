@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +7,8 @@
     <title>BestNearMe</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="shortcut icon" href="Logos/BNM.ico"/>
-    <link rel="stylesheet" type="text/css" href="styleCss.css">
+    <link rel="shortcut icon" href="{% static "images/BNM.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "styleCss.css" %}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
@@ -16,7 +18,7 @@
 </head>
 <body>
 <div class="background">
-    <img src="Logos/Background.jpg" alt="background" style="width: 100%; position: relative;">
+    <img src="{% static "images/Background.jpg" %}" alt="background" style="width: 100%; position: relative;">
     <a href="registration/login.html"><button class="btn2">Log In</button></a>
     <a href="registration/register.html"><button class="btn1">Sign In</button></a>
 </div>
@@ -29,13 +31,13 @@
         <div class="row" style="position: center;">
             <div class="row" style="margin: 0 auto;">
                 <div class="col-4 col-md-4 col-lg-4 col-sm-4">
-                    <img src="Logos/img1.png" style="width: 100%;height: 100%" alt="img1">
+                    <img src="{% static "images/img1.png" %}" style="width: 100%;height: 100%" alt="img1">
                 </div>
                 <div class="col-4 col-md-4 col-lg-4 col-sm-4">
-                    <img src="Logos/img2.png" style="width: 100%;height: 100%" alt="img1">
+                    <img src="{% static "images/img2.png" %}" style="width: 100%;height: 100%" alt="img1">
                 </div>
                 <div class="col-4 col-md-4 col-lg-4 col-sm-4">
-                    <img src="Logos/img3.png" style="width: 100%;height: 100%" alt="img1">
+                    <img src="{% static "images/img3.png" %}" style="width: 100%;height: 100%" alt="img1">
                 </div>
             </div>
         </div>
