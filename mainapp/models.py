@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import MaxValueValidator, MinValueValidator
 from enum import Enum
+from polymorphic.models import PolymorphicModel
 
 
 class UserManager(BaseUserManager):
@@ -22,7 +23,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, first_name, last_name, password):
+    def create_superuser(self, email, username, first_name, last_name, password):  # einai o Reviewer?
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
@@ -74,10 +75,37 @@ class User(AbstractBaseUser):
 
 class Coordinates(models.Model):
     long = models.FloatField(blank=False)
-    lat = models.BigIntegerField(blank=False)
-    add = models.CharField(max_length=70, null=True)
+    lat = models.FloatField(blank=False)
+    address = models.CharField(max_length=70, null=True)
     city = models.CharField(max_length=70, null=True)
     coord_id = models.AutoField(primary_key=True, editable=False)  # na koitaksoyme an kanei swsto crossing
+
+    def set_lat(self, new_lat):
+        self.lat = new_lat
+
+    def set_long(self, new_long):
+        self.long = new_long
+
+    def set_address(self, new_address):
+        self.address = new_address
+
+    def set_city(self, new_city):
+        self.city = new_city
+
+    def get_coord_id(self):
+        return self.coord_id
+
+    def get_lat(self):
+        return self.lat
+
+    def get_long(self):
+        return self.long
+
+    def get_address(self):
+        return self.address
+
+    def get_city(self):
+        return self.city
 
 
 class Preferences(Enum):
@@ -92,46 +120,156 @@ class Schedule(Enum):
     night = "19:00 - 24:00"
 
 
-class Business(models.Model):
-    busName = models.CharField(max_length=100)
+class Business(PolymorphicModel):
+    bus_Name = models.CharField(max_length=100)
     busID = models.AutoField(primary_key=True, editable=False)
-    phoneNum = models.IntegerField(max_length=10, null=True, blank=True)
-    busEmail = models.EmailField(max_length=150)
+    phoneNum = models.IntegerField(null=True, blank=True)
+    busEmail = User.email
     busSite = models.CharField(max_length=100)
-    bsuSchedule = models.CharField(max_length=10,
+    busSchedule = models.CharField(max_length=10,
                                    choices=[(tag, tag.value) for tag in Schedule])
     multimedia = models.FileField(editable=True)  # stin parenthesi tha valoume (upload_to="fakelos gia photos")
     coordID = models.ForeignKey(Coordinates,
                                 on_delete=models.CASCADE)  # na koitaksoyme an kanei swsto crossing
-    # resID = models.ForeignKey()
     ownerID = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.CharField(max_length=10,
                             choices=[(tag, tag.value) for tag in Preferences])
 
+    def set_business_name(self, new_bus_name):
+        self.bus_Name = new_bus_name
 
-#     class Restaurant:
-#         pass
-#
-#     class CoffeeShop:
-#         pass
-#
-#     class Bar:
-#         pass
-#
+    def set_phone(self, new_phone):
+        self.phoneNum = new_phone
 
-class Reviews(models.Model):
-    comments = models.TextField()
-    ratings = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    def set_bus_email(self, new_email):
+        self.busEmail = new_email
+
+    def set_bus_site(self, new_site):
+        self.busSite = new_site
+
+    def set_bus_schedule(self, new_schedule):
+        self.busSchedule = new_schedule
+
+    def set_multimedia(self, new_multimedia):
+        self.multimedia = new_multimedia
+
+    def get_bus_id(self):
+        return self.busID
+
+    def get_bus_name(self):
+        return self.bus_Name
+
+    def get_phone(self):
+        return self.phoneNum
+
+    def get_bus_email(self):
+        return self.busEmail
+
+    def get_bus_site(self):
+        return self.busSite
+
+    def get_bus_schedule(self):
+        return self.busSchedule
+
+    def get_multimedia(self):
+        return self.multimedia
+
+
+class Owner(models.Model):
+
+    owner_id = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    bus_id = models.ForeignKey(Business, on_delete=models.CASCADE)
+
+
+class Customer(models.Model):
+    cusID = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    phoneNumber = models.PositiveIntegerField(null=True, blank=True, help_text='Write Your Phone Number',
+                                              validators=[MaxValueValidator(10)])
+
+
+class Reviewer(models.Model):
+    revID = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+
+
+class Restaurant(Business):
+    dayDishes = models.CharField(max_length=100, null=True, blank=False)
+
+
+class CoffeeShop(Business):
+    pass
+
+
+class Bar(Business):
+    pass
+
+
+class Reviews(PolymorphicModel):
+    review_id = models.AutoField(primary_key=True, editable=False)
+    cus_id = models.ForeignKey(Customer, null=False, blank=False, editable=False, on_delete=models.CASCADE)
     busID = models.ForeignKey(Business, null=False, blank=False, editable=False, on_delete=models.CASCADE)
 
-#
-# class Reservations(models.Model):
-#     day = models.DateTimeField()
-#     resID = models.AutoField(primary_key=True, editable=False)
-#     busID = models.ForeignKey(Business.busID, on_delete=models.CASCADE)
-#     customerID = models.ForeignKey(User.Customer, on_delete=models.CASCADE)
-#     rating = models.PositiveIntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+    def get_review_id(self):
+        return self.review_id
+
+
+class Comments(Reviews):
+    com = models.TextField(null=False, blank=True, help_text='Write a comment from 1 to 300 words',
+                           validators=[MinValueValidator(1), MaxValueValidator(300)])
+
+    def set_edit_com(self, new_com):
+        self.com = new_com
+
+    def get_com(self):
+        return self.com
+
+    def snippet(self):  # an einai megalo to comment tha deixnei mono ta 20 prwta grammata
+        return self.com[:20]
+
+
+class Rating(Reviews):
+    rate = models.PositiveSmallIntegerField(help_text='Choose from 1 to 5 stars', validators=[MinValueValidator(1),
+                                                                                              MaxValueValidator(5)])
+
+    def set_rate(self, new_rate):
+        self.rate = new_rate
+
+    def get_rate(self):
+        return self.rate
+
+
+class Reservations(models.Model):
+    day = models.DateTimeField(auto_now=False, auto_now_add=False)
+    resID = models.AutoField(primary_key=True, editable=False)
+    busID = models.ForeignKey(Business, on_delete=models.CASCADE)
+    customerID = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def set_day(self, day_time):
+        self.day = day_time
+
+    def get_res(self):
+        return self.resID
+
+    def get_bus(self):
+        return self.busID
+
+    def get_customer(self):
+        return self.customerID
+
 #
 #     @classmethod
 #     def book_res(cls, day):
 #         pass
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

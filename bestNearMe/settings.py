@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'crispy_forms',
+    'polymorphic',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
