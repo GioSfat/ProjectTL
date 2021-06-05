@@ -255,6 +255,12 @@ class Reservations(models.Model):
     def get_customer(self):
         return self.customerID
 
+class Tags(models.Model):
+        tag = models.CharField(max_length=50)
+
+
+def get_all_tag():
+    Tags.objects.all()
 #
 #     @classmethod
 #     def book_res(cls, day):
